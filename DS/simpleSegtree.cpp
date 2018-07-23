@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 const int MAXN = 1e5+5;
-int a[MAXN],t[MAXN];
+int a[MAXN],t[4*MAXN];
 void build(int v, int tl, int tr){
 	if(tl==tr)
 		t[v]=a[tl];
