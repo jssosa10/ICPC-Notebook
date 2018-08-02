@@ -1,0 +1,131 @@
+\documentclass[12pt]{article}%
+\usepackage{amsfonts}
+\usepackage{fancyhdr}
+\usepackage{comment}
+\usepackage[a4paper, top=2.5cm, bottom=2.5cm, left=2.2cm, right=2.2cm]%
+{geometry}
+\usepackage{times}
+\usepackage{amsmath}
+\usepackage{changepage}
+\usepackage{amssymb}
+\usepackage{graphicx}%
+\setcounter{MaxMatrixCols}{30}
+\newtheorem{theorem}{Theorem}
+\newtheorem{acknowledgement}[theorem]{Acknowledgement}
+\newtheorem{algorithm}[theorem]{Algorithm}
+\newtheorem{axiom}{Axiom}
+\newtheorem{case}[theorem]{Case}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{conclusion}[theorem]{Conclusion}
+\newtheorem{condition}[theorem]{Condition}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{criterion}[theorem]{Criterion}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{exercise}[theorem]{Exercise}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{notation}[theorem]{Notation}
+\newtheorem{problem}[theorem]{Problem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{solution}[theorem]{Solution}
+\newtheorem{summary}[theorem]{Summary}
+\newenvironment{proof}[1][Proof]{\textbf{#1.} }{\ \rule{0.5em}{0.5em}}
+
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+
+\begin{document}
+
+\section{Difference Equations}
+F is a vector space defined as,
+\begin{alignat*}{9}
+F(c\cdot x + y) &= c\cdot F(x) + F(y) \\
+(F+G)x &= F(x) + G(x) \\
+(c\cdot F)x &= c\cdot F(x) \\
+(F\cdot G)x &= F(Gx) \\
+F(G+H) &= FG + FH = (G+H)F\\
+\end{alignat*}
+Where, $I$ is the identity function, and $E$ is the \textit{advance} operator and the nullifier is defined as,
+\begin{alignat*}{9}
+P(\lambda) &= (\lambda - \lambda_0)^m \\
+P(E)x = 0 &\Rightarrow (E-\lambda_0)^m x = 0 \\
+(E-\lambda_0) ^m &\text{ is the nullifier of } n^j\lambda^n_0, 0\leq j < m \\
+A(E) \text{ is the nullifier of } a_n &\Rightarrow A(E) \text{ is the nullifier of } c\cdot a_n
+\end{alignat*}
+
+\subsection{Homogeneous Linear Equations}
+Different roots,
+\begin{alignat*}{9}
+a_{0} = 0; a_{1} &= 1; n\geq 2 \\
+a_{n} - 5a_{n-1} + 6a_{n-2} &= 0 \\
+a_{n+2} - 5a_{n+1} + 6a_{n} &= 0 \\
+(E^2 - 5E - 6I)a &= 0 \\
+(E-3)(E-2)a &= 0 \\
+a_n = A\cdot 3^n &+ B\cdot 2^n \\
+a_0 = 0 &= A + B \\
+a_1 = 1 &= 3A + 2B \\
+A = 1; B &= -1 \\
+a_n &= 3^n - 2^n
+\end{alignat*}
+Same roots,
+\begin{alignat*}{9}
+a_{0} = 0; a_{1} &= 1; n\geq 0 \\
+a_{n+2} - 4a_{n+1} + 4a_{n} &= 0 \\
+(E^2 - 4E + 4I)a &= 0 \\
+(E-2)^2a &= 0 \\
+a_n = A\cdot 2^n &+ Bn\cdot 2^n \\
+a_0 = 0 &= A \\
+a_1 = 1 &= 2A + 2B \\
+A = 0; B &= 1/2 \\
+a_n &= \frac{n}{2} \cdot 2^n = n2^{n-1}
+\end{alignat*}
+
+\subsection{Non-Homogeneous Linear Equations}
+\begin{alignat*}{9}
+a_{0} = 1; a_{1} &= 3; n\geq 0 \\
+a_{n+1} - 2a_{n} &= 1 \\
+(E - 2I)a &= 1 \\
+(E-1) \text{ is the nullifier of } n^01^n &= 1 \\
+(E-1)(E-2)a &= 0 \\
+a_n = A &+ B\cdot 2^n \\
+a_0 = 1 &= A + B \\
+a_1 = 3 &= A + 2B \\
+A = -1; B &= 2 \\
+a_n &= -1 + 2\cdot 2^n = 2^{n+1} - 1
+\end{alignat*}
+\begin{alignat*}{9}
+a_{n+1} + a_{n} &= 3n + 2^n + 4 \\
+(E + 1I)a &= 3n + 2^n + 4 \\
+(E-1)^2 &\text{ is the nullifier of } 2n \text{ and } 4 \\
+(E-2) &\text{ is the nullifier of } 2^n \\
+(E-1)(E-2)(E+1)a &= 0 \\
+a_n = A + Bn &+ C\cdot 2^n + D(-1)^n \\
+\end{alignat*}
+
+\subsection{Non-linear Equations}
+Merge sort example,
+\begin{alignat*}{9}
+M(1) &= 0; n>1\\
+M(n) &= 2M(n/2) + n - 1 \\
+x_0 = 1; x_k = n; x_{k+1} &= n/2; x_k = 2x_{k-1} \\
+x_{k+1} - 2x_k &= 0 \\
+x_k &= \alpha \cdot 2^k; x_0 = 1 = \alpha \\
+x_k &= 2^k \\
+2^k &= n \\
+k &= log(n) \\
+y_k &= M(x_k) \\
+y_k &= M(n) \\
+y_{k-1} &= M(x_{k-1}) = M(n/2) \\
+y_k &= 2y_{k-1} + 2^k -1 \\
+y_{k+1} - 2y_k &= 2^{k+1} -1 \\
+(E-2)y &= 2^{k+1} -1 \\
+(E-2)^2(E-1)y &= 0 \\
+y_k &= A2^k + Bk2^k + C \\
+M(n) &= An + Bnlog(n) + C
+\end{alignat*}
+
+\end{document}
