@@ -32,5 +32,8 @@ int dijkstra(int source,int target){
 }
 int main(){
     int minn = dijkstra(s,t);
+<<<<<<< HEAD
     return 0;
+=======
+>>>>>>> f662d64fcacd40fb95093e69328ad55b959b3660
 }
