@@ -20,7 +20,7 @@ int get(int v, int tl, int tr, int l, int r){
 	if(tl==l&&tr==r)
 		return t[v];		
 	int tm = (tl+tr)/2;
-	return get(v*2,tl,tm,l,min(r,tm))+get(v*2,tm+1,tl,max(tm+1,l),r);
+	return get(v*2,tl,tm,l,min(r,tm))+get(v*2,tm+1,tr,max(tm+1,l),r);
 		
 }
 void update(int v,int tl, int tr, int pos, int new_val){
