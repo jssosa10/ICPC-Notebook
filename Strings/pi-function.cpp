@@ -15,13 +15,32 @@ vector<int> pi_function(string s){
 	}
 	return pi;
 }
+
+//Las entradas del atomata son (old_pi,c)->new_pi
+void compute_automaton(string s, vector<vector<int>>& aut) {
+    s += '#';
+    int n = s.size();
+    vector<int> pi = pi_function(s);
+    aut.assign(n, vector<int>(26));
+    for (int i = 0; i < n; i++) {
+        for (int c = 0; c < 26; c++) {
+            int j = i;
+            while (j > 0 && 'a' + c != s[j])
+                j = pi[j-1];
+            if ('a' + c == s[j])
+                j++;
+            aut[i][c] = j;
+        }
+    }
+}
+
 int main(){
 	string p;
        	string t;
 	cin>>t>>p;
 	int len = (int)p.length();
 	// hacer kmp es igual a halla la prefix function de p+"#"+s y calcular y un match es equivalente a pi[i]=len(p)
-	string kmp = p+"#"+t;	
+	string kmp = p+"#"+t;
 	vector<int> pi = pi_function(kmp);
 	for(int i = 0; i<(int)pi.size();i++)
 		printf("%d ",pi[i]);
