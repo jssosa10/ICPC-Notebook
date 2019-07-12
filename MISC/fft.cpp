@@ -69,3 +69,70 @@ void fft(vector<cd> & a, bool invert) {
     }
 }
 
+vector<int> multiply(vector<int> const& a, vector<int> const& b) {
+    vector<cd> fa(a.begin(), a.end()), fb(b.begin(), b.end());
+    int n = 1;
+    while (n < a.size() + b.size())
+        n <<= 1;
+    fa.resize(n);
+    fb.resize(n);
+    bit_reverse(n);
+    calc_r(n);
+    fft(fa, false);
+    fft(fb, false);
+    for (int i = 0; i < n; i++)
+        fa[i] *= fb[i];
+    fft(fa, true);
+
+    vector<int> result(n);
+    for (int i = 0; i < n; i++)
+        result[i] = round(fa[i].real());
+    return result;
+}
+
+//vector que retorna las posiciones donde hace match el patron p en el string s
+//ambos son vectores de letras minusculas. Se debe cambiar el metodo de multiply para que los vectores
+//de entrada sean de cd. p puede tener wildcards, corresponde al char en WC.
+vector<int> find_pattern(string s, string p){
+    int n,m;
+    n = s.size(), m = p.size();
+    vector<cd > a(n);
+    vector<cd > b(m);
+
+    double alpha=0;
+    bool k;
+    int wcs =0;
+    for(int i =0; i<n; i++){
+        alpha = (2.0*PI*(s[i]-'a'))/26.0;
+        cd w (cos(alpha),sin(alpha));
+        a[i]= w;
+    }
+
+    for(int i =0; i<m; i++){
+        if(p[m-i-1]==WC){
+            k=0;
+            wcs++;
+        }
+        else{
+            k=1;
+        }
+        alpha = (2.0*PI*(p[m-i-1]-'a'))/26.0;
+        cd w (cos(alpha)*k,-sin(alpha)*k);
+        b[i]= w;
+    }
+    vector<double> c = multiply(a,b);
+    vector<int> rta;
+    wcs = m-wcs;
+    for(int i =m-1;  i<n; i++){
+        double x = c[i];
+        double diff = x-wcs;
+        if(abs(diff)<EPS){
+            rta.pb(i-(m-1)+1);
+        }
+
+    }
+    return rta;
+}
+
+
+
