@@ -19,6 +19,6 @@ bool diophantine(int a , int b , int c){
 	int m = c/d;
 	x*=m;
 	y*=m;
-
+    return true;
 	//all equations k*(b/gcd , -a/gcd)
 }
